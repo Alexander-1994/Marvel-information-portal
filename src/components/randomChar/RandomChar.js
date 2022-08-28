@@ -7,11 +7,6 @@ import { Component } from 'react/cjs/react.development';
 import './randomChar.scss';
 
 class RandomChar extends Component {
-    constructor(props) {
-        super(props);
-        this.updateChar();
-    }
-
     state = {
         char: {},
         loading: true,
@@ -41,6 +36,15 @@ class RandomChar extends Component {
             .getCharacter(id)
             .then(this.onCharLoaded)
             .catch(this.onError)
+    }
+
+    componentDidMount = () => {                                                             /* хук "монтирования" компонента */
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 5000)
+    }
+
+    componentWillUnmount = () => {                                                          /* хук "размонтирования" компонента */
+        clearInterval(this.timerId)
     }
 
     render() {
