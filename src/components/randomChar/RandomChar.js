@@ -29,9 +29,16 @@ class RandomChar extends Component {
         })
     }
 
+    onCharLoading = () => {                                                                 /* метод обновляет loading в true >>> При обновении персонажа, перед выполнением запроса "мелькнёт" спиннер */
+        this.setState({
+            loading: true
+        })
+    }
+
     updateChar = () => {                                                                    /* метод обновления рандомного персонажа */
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
 
+        this.onCharLoading();
         this.marvelService
             .getCharacter(id)
             .then(this.onCharLoaded)
@@ -40,11 +47,11 @@ class RandomChar extends Component {
 
     componentDidMount = () => {                                                             /* хук "монтирования" компонента */
         this.updateChar();
-        this.timerId = setInterval(this.updateChar, 5000)
+        this.timerId = setInterval(this.updateChar, 5000);
     }
 
     componentWillUnmount = () => {                                                          /* хук "размонтирования" компонента */
-        clearInterval(this.timerId)
+        clearInterval(this.timerId);
     }
 
     render() {
@@ -67,7 +74,10 @@ class RandomChar extends Component {
                         Or choose another one
                     </p>
                     <button className="button button__main">
-                        <div className="inner">try it</div>
+                        <div className="inner"
+                             onClick={this.updateChar}>
+                                try it
+                        </div>
                     </button>
                     <img src={mjolnir} alt="mjolnir" className="randomchar__decoration"/>
                 </div>
@@ -82,10 +92,11 @@ export default RandomChar;
 
 const ViewChar = ({char}) => {
     const {name, description, thumbnail, homepage, wiki} = char;
+    const imgStyle = thumbnail.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : {objectFit: 'cover'};
 
     return (
         <div className="randomchar__block">
-            <img src={thumbnail} alt="Random character" className="randomchar__img"/>
+            <img src={thumbnail} style={imgStyle} alt="Random character" className="randomchar__img"/>
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
                 <p className="randomchar__descr">{description}</p>
