@@ -6,6 +6,9 @@ import { Component } from 'react';
 import './charList.scss';
 
 class CharList extends Component {
+    constructor(props) {
+        super(props);
+    }
     state = {
         charList: [],
         loading: true,
@@ -39,7 +42,8 @@ class CharList extends Component {
             const imgStyle = elem.thumbnail.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : {objectFit: 'cover'};
 
             return <li className="char__item" 
-                key={elem.id}>
+                key={elem.id}
+                onClick={() => this.props.onSelectedChar(elem.id)}>
                     <img src={elem.thumbnail} alt={elem.name} style={imgStyle} />
                     <div className="char__name">{elem.name}</div>
             </li>

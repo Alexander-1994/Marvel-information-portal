@@ -86,10 +86,6 @@ class RandomChar extends Component {
     }
 }
 
-export default RandomChar;
-
-
-
 const ViewChar = ({char}) => {
     const {name, description, thumbnail, homepage, wiki} = char;
     const imgStyle = thumbnail.indexOf('image_not_available') > -1 ? {objectFit: 'contain'} : {objectFit: 'cover'};
@@ -112,3 +108,5 @@ const ViewChar = ({char}) => {
         </div>
     )
 }
+
+export default RandomChar;
