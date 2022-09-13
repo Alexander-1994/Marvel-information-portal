@@ -2,9 +2,9 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import MarvelService from '../../services/MarvelService';
-import Skeleton from '../skeleton/Skeleton';
-import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
 
@@ -107,7 +107,7 @@ const ViewCharInfo = ({char}) => {
                 { comics.length === 0 ? 'Comics not found' : null } 
                 {
                     comics.map((item, i) => {
-                        if (i > 9) return
+                        if (i > 9) return;
 
                         return (
                             <li className="char__comics-item"

@@ -1,10 +1,11 @@
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import { Component } from 'react';
+
 import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
-import mjolnir from '../../resources/img/mjolnir.png';
-import { Component } from 'react/cjs/react.development';
 
 import './randomChar.scss';
+import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
     state = {
