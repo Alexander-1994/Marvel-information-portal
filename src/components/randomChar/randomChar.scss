@@ -38,6 +38,7 @@
         }
     }
     &__static {
+        overflow: hidden;
         padding: 40px 35px;
         background-color: $dark;
         position: relative;
