@@ -1,31 +1,13 @@
-class MarvelService {
-    _apiBase = 'https://gateway.marvel.com:443/v1/public/';
-    _apiKey = 'apikey=cc3718966f7ae60fd4a489f88f2c3bef';
-    _baseOffset = 210;
+import { useHttp } from "../hooks/http.hook";
 
-    getResource = async (url) => {                                                   /* функция отправки запроса получения данных */
-        let res = await fetch(url);
-        
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
+export const useMarvelService = () => {
+    const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
+    const _apiKey = 'apikey=cc3718966f7ae60fd4a489f88f2c3bef';
+    const _baseOffset = 210;
 
-        return await res.json();
-    }
+    const {loading, error, request, clearError} = useHttp();
 
-    getAllCharacters = async (offset = this._baseOffset) => {                        /* функция получения всех персонажей */
-        const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);
-
-        return res.data.results.map(this._transformCaracter);
-    }
-
-    getCharacter = async (id) => {                                                   /* функция получения конкретного персонажа */
-        const res = await this.getResource(`${this._apiBase}characters/${id}?${this._apiKey}`);
-
-        return this._transformCaracter(res.data.results[0]);
-    }
-
-    _transformCaracter = (char) => {                                                 /* функция трансформации объекта с данными персонажа в объект с только нужными свойствами */
+    const _transformCaracter = (char) => {                                                
         return {
             id: char.id,
             name: char.name,
@@ -36,6 +18,24 @@ class MarvelService {
             comics: char.comics.items
         }
     }
-}
 
-export default MarvelService;
+    const getAllCharacters = async (offset = _baseOffset) => {                       
+        const res = await request(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`);
+
+        return res.data.results.map(_transformCaracter);
+    }
+
+    const getCharacter = async (id) => {                          
+        const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
+
+        return _transformCaracter(res.data.results[0]);
+    }
+
+    return {
+        loading,
+        error,
+        clearError,
+        getAllCharacters,
+        getCharacter
+    }
+}
