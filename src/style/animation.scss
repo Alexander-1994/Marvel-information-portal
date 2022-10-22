@@ -1,0 +1,22 @@
+@keyframes back {
+    0% {
+        color: olive;
+        transform: scale(1);
+    }
+    25% {
+        color: orange;
+        transform: scale(1.1);
+    }
+    50% {
+        color: red;
+        transform: scale(1);
+    }
+    75% {
+        color: blue;
+        transform: scale(1.1);
+    }
+    100% {
+        color: purple;
+        transform: scale(1);
+    }
+}
