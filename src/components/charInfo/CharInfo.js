@@ -75,7 +75,7 @@ const ViewCharInfo = ({char}) => {
                 { comics.length === 0 ? 'Comics not found' : null } 
                 {
                     comics.map((item, i) => {
-                        if (i > 9) return;
+                        if (i > 7) return;
                
                         return (
                             <li className="char__comics-item"
