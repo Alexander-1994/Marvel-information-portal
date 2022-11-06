@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet"
 import { Link } from "react-router-dom"
 
 import ErrorMessage from "../errorMessage/ErrorMessage"
@@ -5,6 +6,13 @@ import ErrorMessage from "../errorMessage/ErrorMessage"
 const Page404 = () => {
     return (
         <div>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Page not found" />
+                <title>Page not found</title>
+            </Helmet>
+
             <ErrorMessage />
             <p 
                 style={{textAlign: 'center', fontWeight: 'bold', fontSize: '24px'}}>
